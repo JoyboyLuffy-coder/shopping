@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WORKSHOP & CO. — Tools & DIY Supplies</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kraft:#f0e4c8;
+  --warm:#e8d5a8;
+  --rust:#c45c2a;
+  --oak:#8b5e3c;
+  --pine:#3d5a3e;
+  --steel:#4a5568;
+  --dark:#1e1a14;
+  --muted:#9a8a72;
+  --white:#faf7f2;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--kraft);color:var(--dark);font-family:'Instrument Sans',sans-serif;min-height:100vh}
+
+/* Kraft paper texture */
+body::before{content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='500' height='500' filter='url(%23paper)' opacity='.06'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:999}
+
+/* ANNOUNCEMENT */
+.announcement{background:var(--rust);color:white;text-align:center;padding:9px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:500}
+
+/* HEADER */
+header{background:var(--dark);padding:0 52px;height:70px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100}
+.logo-area{display:flex;align-items:center;gap:14px}
+.logo-stamp{width:44px;height:44px;background:var(--rust);display:flex;align-items:center;justify-content:center;border-radius:4px;transform:rotate(-2deg)}
+.logo-stamp span{font-family:'Fraunces',serif;font-size:22px;font-weight:900;color:white;font-style:italic}
+.logo-text{font-family:'Fraunces',serif;font-size:20px;font-weight:700;color:var(--white);line-height:1}
+.logo-text small{display:block;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);font-family:'Instrument Sans',sans-serif;font-weight:400;font-style:normal}
+nav{display:flex;gap:28px;align-items:center}
+nav a{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(250,247,242,0.5);text-decoration:none;font-weight:500;transition:color .15s}
+nav a:hover{color:var(--white)}
+.nav-cart{background:var(--rust);color:white;border:none;padding:10px 22px;font-family:'Instrument Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .2s;display:flex;align-items:center;gap:8px}
+.nav-cart:hover{background:#a84d22}
+.nav-cart .badge{background:white;color:var(--rust);width:18px;height:18px;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center}
+
+/* HERO */
+.hero{background:var(--dark);display:grid;grid-template-columns:1fr 1fr;min-height:80vh;position:relative;overflow:hidden}
+.hero::after{content:'EST. 1978';position:absolute;font-family:'Fraunces',serif;font-size:18vw;font-weight:900;font-style:italic;color:rgba(250,247,242,0.03);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;user-select:none;pointer-events:none}
+.hero-left{padding:80px 56px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--rust);margin-bottom:24px;font-weight:700}
+.hero-tag::before,.hero-tag::after{content:'';width:20px;height:1px;background:var(--rust)}
+.hero-title{font-family:'Fraunces',serif;font-size:clamp(48px,5.5vw,82px);font-weight:900;line-height:.95;color:var(--white);margin-bottom:24px;animation:slideIn .7s ease both}
+.hero-title em{font-style:italic;color:var(--rust)}
+.hero-body{font-size:15px;color:rgba(250,247,242,0.5);font-weight:400;line-height:1.8;max-width:340px;margin-bottom:40px;animation:slideIn .7s .12s ease both}
+.hero-btns{display:flex;gap:14px;animation:slideIn .7s .22s ease both}
+.btn-rust{background:var(--rust);color:white;border:none;padding:15px 32px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .2s}
+.btn-rust:hover{background:#a84d22}
+.btn-oak{background:none;border:2px solid rgba(250,247,242,0.2);color:rgba(250,247,242,0.7);padding:15px 32px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:all .2s}
+.btn-oak:hover{border-color:var(--white);color:var(--white)}
+.hero-trust{display:flex;gap:24px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(250,247,242,0.08);animation:slideIn .7s .3s ease both}
+.trust-item{font-size:12px;color:rgba(250,247,242,0.4);display:flex;align-items:center;gap:8px}
+.trust-icon{font-size:18px}
+
+.hero-right{position:relative;background:url('https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&q=80') center/cover;filter:brightness(.6) saturate(.8)}
+.hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to left,transparent 60%,var(--dark))}
+
+/* CATEGORIES */
+.categories{padding:56px 52px;background:var(--white)}
+.cat-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px}
+.cat-title{font-family:'Fraunces',serif;font-size:36px;font-weight:700;line-height:1.1}
+.cat-title em{font-style:italic;color:var(--rust)}
+.cat-link{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--rust);text-decoration:none;font-weight:700;border-bottom:1px solid var(--rust);padding-bottom:2px}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.cat-card{background:var(--kraft);padding:28px 20px;text-align:center;cursor:pointer;border:2px solid transparent;transition:all .2s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;inset:0;background:var(--rust);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;z-index:0}
+.cat-card:hover::before{transform:scaleY(1)}
+.cat-card:hover .cat-icon,.cat-card:hover .cat-name,.cat-card:hover .cat-count{color:white;position:relative;z-index:1}
+.cat-card.active-cat{background:var(--rust);border-color:var(--rust)}
+.cat-card.active-cat .cat-name,.cat-card.active-cat .cat-count{color:white}
+.cat-icon{font-size:32px;display:block;margin-bottom:12px;position:relative;z-index:1;transition:color .3s}
+.cat-name{font-family:'Fraunces',serif;font-size:16px;font-weight:700;display:block;margin-bottom:4px;position:relative;z-index:1;transition:color .2s}
+.cat-count{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);display:block;position:relative;z-index:1;transition:color .2s}
+
+/* PRODUCTS */
+.shop{padding:40px 52px 64px;background:var(--kraft)}
+.shop-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;flex-wrap:wrap;gap:16px}
+.shop-title{font-family:'Fraunces',serif;font-size:28px;font-weight:700}
+.shop-tools{display:flex;gap:10px;align-items:center}
+.sort-pick{background:var(--white);border:1px solid rgba(138,90,60,0.2);color:var(--dark);padding:9px 14px;font-family:'Instrument Sans',sans-serif;font-size:12px;letter-spacing:1px;cursor:pointer;border-radius:3px;outline:none}
+.item-count{font-size:12px;color:var(--muted);letter-spacing:1px}
+
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+
+.diy-card{background:var(--white);border:1px solid rgba(138,90,60,0.12);cursor:pointer;transition:transform .2s,box-shadow .2s;animation:slideIn .5s ease both;border-radius:4px;overflow:hidden}
+.diy-card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(30,26,20,0.12)}
+
+.diy-img{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--kraft)}
+.diy-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.diy-card:hover .diy-img img{transform:scale(1.06)}
+.diy-badge{position:absolute;top:12px;left:12px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border-radius:2px}
+.dbadge-new{background:var(--pine);color:white}
+.dbadge-sale{background:var(--rust);color:white}
+.dbadge-pro{background:var(--dark);color:var(--kraft)}
+.dbadge-kit{background:var(--oak);color:white}
+.diy-wish{position:absolute;top:12px;right:12px;background:rgba(250,247,242,0.9);border:none;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;opacity:0;transition:opacity .2s;backdrop-filter:blur(4px)}
+.diy-card:hover .diy-wish{opacity:1}
+
+.diy-body{padding:18px}
+.diy-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rust);margin-bottom:6px;font-weight:700}
+.diy-name{font-family:'Fraunces',serif;font-size:17px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.diy-desc{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.diy-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid rgba(138,90,60,0.1)}
+.diy-price{font-family:'Fraunces',serif;font-size:20px;font-weight:700}
+.diy-price .orig{font-size:12px;text-decoration:line-through;color:var(--muted);font-weight:400;margin-left:6px;font-family:'Instrument Sans',sans-serif}
+.add-btn{background:var(--rust);color:white;border:none;padding:9px 18px;font-family:'Instrument Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .15s;white-space:nowrap}
+.add-btn:hover{background:#a84d22}
+.rating-row{display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.stars{color:#d4a017;font-size:11px}
+.rating-count{font-size:11px;color:var(--muted)}
+
+/* WORKSHOP TIP */
+.tip-section{background:var(--pine);color:white;padding:60px 52px;display:grid;grid-template-columns:2fr 3fr;gap:60px;align-items:center}
+.tip-eyebrow{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:16px}
+.tip-title{font-family:'Fraunces',serif;font-size:40px;font-weight:700;line-height:1.1}
+.tip-title em{font-style:italic}
+.tips-list{display:flex;flex-direction:column;gap:20px}
+.tip-item{display:flex;gap:20px;align-items:flex-start}
+.tip-num{font-family:'Fraunces',serif;font-size:36px;font-weight:900;font-style:italic;color:rgba(255,255,255,0.2);line-height:1;flex-shrink:0;width:40px}
+.tip-text h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.tip-text p{font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5;font-weight:300}
+
+/* CART DRAWER */
+.cart-overlay{position:fixed;inset:0;background:rgba(30,26,20,0.6);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:420px;background:var(--white);border-left:1px solid rgba(138,90,60,0.15);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.25,.1,.25,1)}
+.cart-drawer.open{transform:translateX(0)}
+.cdh{padding:28px 32px;border-bottom:1px solid rgba(138,90,60,0.1);display:flex;justify-content:space-between;align-items:center;background:var(--dark)}
+.cdh-t{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--white)}
+.cdh-close{background:none;border:none;color:rgba(250,247,242,0.5);font-size:22px;cursor:pointer;transition:color .15s}
+.cdh-close:hover{color:var(--white)}
+.cdbody{flex:1;overflow-y:auto;padding:24px 32px;background:var(--white)}
+.cd-item{display:grid;grid-template-columns:80px 1fr auto;gap:14px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(138,90,60,0.1)}
+.cd-img{background:var(--kraft);border-radius:3px;overflow:hidden;aspect-ratio:4/3}
+.cd-img img{width:100%;height:100%;object-fit:cover}
+.cdi-cat{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--rust);font-weight:700;margin-bottom:3px}
+.cdi-name{font-family:'Fraunces',serif;font-size:15px;font-weight:700;margin-bottom:6px}
+.cdi-price{font-size:13px;font-weight:500}
+.cdi-rem{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;align-self:start;transition:color .15s}
+.cdi-rem:hover{color:var(--rust)}
+.cdf{padding:24px 32px;border-top:1px solid rgba(138,90,60,0.1);background:var(--white)}
+.cdf-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px}
+.cdf-total{display:flex;justify-content:space-between;font-family:'Fraunces',serif;font-size:22px;font-weight:700;margin:12px 0 20px}
+.cdf-total span:last-child{color:var(--rust)}
+.co-btn{width:100%;background:var(--rust);color:white;border:none;padding:16px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border-radius:3px;transition:background .2s}
+.co-btn:hover{background:#a84d22}
+.cd-empty{text-align:center;padding:60px 0;color:var(--muted);font-family:'Fraunces',serif;font-size:20px;font-style:italic}
+
+footer{background:var(--dark);color:var(--white);padding:48px 52px;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px}
+.fl-brand{font-family:'Fraunces',serif;font-size:22px;font-weight:700;font-style:italic;margin-bottom:12px;color:var(--white)}
+.fl-brand span{color:var(--rust)}
+.fl-tagline{font-size:13px;color:rgba(250,247,242,0.35);font-weight:300;line-height:1.6}
+.fl-head{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(250,247,242,0.3);margin-bottom:14px;font-weight:700}
+.fl-links a{display:block;font-size:13px;color:rgba(250,247,242,0.4);text-decoration:none;margin-bottom:8px;transition:color .15s}
+.fl-links a:hover{color:var(--white)}
+
+@keyframes slideIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}.cat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){
+  header{padding:0 20px}.logo-text small{display:none}nav{gap:12px}nav a{display:none}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:56vw}
+  .hero-left{padding:48px 24px}
+  .categories{padding:40px 24px}.cat-grid{grid-template-columns:repeat(3,1fr)}
+  .shop{padding:32px 24px 48px}
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .tip-section{grid-template-columns:1fr;padding:40px 24px;gap:32px}
+  footer{grid-template-columns:1fr 1fr;padding:36px 24px}
+}
+@media(max-width:480px){.product-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:1fr 1fr}.cart-drawer{width:100%}.hero-btns{flex-direction:column}}
+</style>
+</head>
+<body>
+
+<div class="announcement">🔨 Free Delivery on Orders ₹2,500+ · Use WORKSHOP10 for 10% off</div>
+
+<header>
+  <div class="logo-area">
+    <div class="logo-stamp"><span>W</span></div>
+    <div class="logo-text">Workshop & Co.<small>Since 1978</small></div>
+  </div>
+  <nav>
+    <a href="#">Tools</a>
+    <a href="#">Supplies</a>
+    <a href="#">Kits</a>
+    <a href="#">Projects</a>
+  </nav>
+  <button class="nav-cart" onclick="toggleCart()">
+    🧰 Cart <span class="badge" id="cartBadge">0</span>
+  </button>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Build Something Remarkable</div>
+    <div class="hero-title">Tools for<br>Real <em>Makers</em></div>
+    <div class="hero-body">From weekend woodworkers to seasoned craftspeople — we stock the gear that gets the job done right, every time.</div>
+    <div class="hero-btns">
+      <button class="btn-rust" onclick="scrollToShop()">Shop All Tools</button>
+      <button class="btn-oak">View Project Ideas</button>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-icon">🔧</span>Pro-grade tools</div>
+      <div class="trust-item"><span class="trust-icon">🚚</span>Same-day dispatch</div>
+      <div class="trust-item"><span class="trust-icon">⭐</span>Expert advice</div>
+    </div>
+  </div>
+  <div class="hero-right"></div>
+</section>
+
+<div class="categories">
+  <div class="cat-header">
+    <div class="cat-title">Shop by <em>Category</em></div>
+    <a href="#" class="cat-link">All Categories →</a>
+  </div>
+  <div class="cat-grid" id="catGrid">
+    <div class="cat-card active-cat" onclick="filterDIY(this,'all')"><span class="cat-icon">🔨</span><span class="cat-name">All Tools</span><span class="cat-count">48 items</span></div>
+    <div class="cat-card" onclick="filterDIY(this,'power')"><span class="cat-icon">⚡</span><span class="cat-name">Power Tools</span><span class="cat-count">14 items</span></div>
+    <div class="cat-card" onclick="filterDIY(this,'hand')"><span class="cat-icon">🪚</span><span class="cat-name">Hand Tools</span><span class="cat-count">12 items</span></div>
+    <div class="cat-card" onclick="filterDIY(this,'paint')"><span class="cat-icon">🎨</span><span class="cat-name">Paint & Finish</span><span class="cat-count">9 items</span></div>
+    <div class="cat-card" onclick="filterDIY(this,'kit')"><span class="cat-icon">📦</span><span class="cat-name">Starter Kits</span><span class="cat-count">7 items</span></div>
+  </div>
+</div>
+
+<div class="shop" id="shopSection">
+  <div class="shop-top">
+    <div>
+      <div class="shop-title">Featured Products</div>
+      <div class="item-count" id="itemCount">12 items</div>
+    </div>
+    <div class="shop-tools">
+      <select class="sort-pick"><option>Bestsellers</option><option>Price: Low–High</option><option>Price: High–Low</option><option>Newest</option></select>
+    </div>
+  </div>
+  <div class="product-grid" id="diyGrid"></div>
+</div>
+
+<div class="tip-section">
+  <div>
+    <div class="tip-eyebrow">From our craftspeople</div>
+    <div class="tip-title">Workshop <em>Wisdom</em></div>
+  </div>
+  <div class="tips-list">
+    <div class="tip-item"><div class="tip-num">01</div><div class="tip-text"><h4>Measure Twice, Cut Once</h4><p>The oldest rule in the book is still the most broken. A 30-second check saves hours of rework.</p></div></div>
+    <div class="tip-item"><div class="tip-num">02</div><div class="tip-text"><h4>Invest in Blades First</h4><p>A sharp, quality blade on a cheap saw beats a dull blade on an expensive one every time.</p></div></div>
+    <div class="tip-item"><div class="tip-num">03</div><div class="tip-text"><h4>Finish with the Grain</h4><p>Always sand parallel to the wood grain. Cross-grain scratches show through any stain or varnish.</p></div></div>
+  </div>
+</div>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cdh">
+    <div class="cdh-t">Your Cart</div>
+    <button class="cdh-close" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cdbody" id="cdbody"><div class="cd-empty">Your cart is empty.</div></div>
+  <div class="cdf">
+    <div class="cdf-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+    <div class="cdf-row"><span>Delivery</span><span>Free over ₹2,500</span></div>
+    <div class="cdf-total"><span>Total</span><span id="cdTotal">₹0</span></div>
+    <button class="co-btn" onclick="checkout()">Checkout →</button>
+  </div>
+</div>
+
+<footer>
+  <div><div class="fl-brand"><span>W</span>orkshop & Co.</div><div class="fl-tagline">Tools and supplies for makers, builders, and people who believe in doing things properly.</div></div>
+  <div><div class="fl-head">Shop</div><div class="fl-links"><a href="#">Power Tools</a><a href="#">Hand Tools</a><a href="#">Paints & Finishes</a><a href="#">Starter Kits</a><a href="#">Safety Gear</a></div></div>
+  <div><div class="fl-head">Learn</div><div class="fl-links"><a href="#">Project Guides</a><a href="#">Video Tutorials</a><a href="#">Tool Reviews</a><a href="#">Community</a></div></div>
+  <div><div class="fl-head">Support</div><div class="fl-links"><a href="#">Contact Us</a><a href="#">Returns</a><a href="#">Warranty</a><a href="#">Bulk Orders</a></div></div>
+</footer>
+
+<script>
+const items=[
+  {id:1,name:'Compact Drill Set',cat:'power',badge:'pro',price:8400,old:null,rating:4.8,reviews:234,desc:'18V brushless motor with 21 torque settings and LED work light.',img:'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&q=75'},
+  {id:2,name:'Japanese Pull Saw',cat:'hand',badge:'new',price:2200,old:2800,rating:4.9,reviews:187,desc:'Razorsharp 240mm crosscut blade, replaceable when dull.',img:'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=75'},
+  {id:3,name:'Woodworker Starter Kit',cat:'kit',badge:'kit',price:6800,old:9200,rating:4.7,reviews:312,desc:'21 essentials including chisels, mallet, marking gauge and more.',img:'https://images.unsplash.com/photo-1581557991964-125469da3b8a?w=400&q=75'},
+  {id:4,name:'Orbital Sander 125mm',cat:'power',badge:'pro',price:4900,old:null,rating:4.6,reviews:98,desc:'5-speed variable, dust bag included. Perfect for finishing work.',img:'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?w=400&q=75'},
+  {id:5,name:'Chalk Paint Set',cat:'paint',badge:'new',price:1850,old:null,rating:4.5,reviews:156,desc:'6×250ml chalk finish paints — no primer, no sealer needed.',img:'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=400&q=75'},
+  {id:6,name:'Carving Chisel Set 6pc',cat:'hand',badge:null,price:3400,old:4200,rating:4.8,reviews:74,desc:'High-carbon steel, octagonal beech handles. Honed to 25°.',img:'https://images.unsplash.com/photo-1596460108600-dca41819e44c?w=400&q=75'},
+  {id:7,name:'Laser Level Self-Levelling',cat:'power',badge:'pro',price:5600,old:null,rating:4.7,reviews:201,desc:'3×360° beams, 40m range, IP54 dust/water rated.',img:'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=75'},
+  {id:8,name:'Wood Stain Sampler 12pk',cat:'paint',badge:'new',price:990,old:null,rating:4.4,reviews:88,desc:'12 tones from light oak to ebony. 50ml each — test before you commit.',img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75'},
+];
+
+let cart={};
+
+function renderItems(list){
+  document.getElementById('itemCount').textContent=list.length+' items';
+  document.getElementById('diyGrid').innerHTML=list.map((p,i)=>`
+  <div class="diy-card" style="animation-delay:${i*.06}s">
+    <div class="diy-img">
+      <img src="${p.img}" alt="${p.name}" loading="lazy">
+      <div class="diy-badge dbadge-${p.badge||'new'}">${p.badge||''}</div>
+      <button class="diy-wish">♡</button>
+    </div>
+    <div class="diy-body">
+      <div class="diy-cat">${p.cat}</div>
+      <div class="diy-name">${p.name}</div>
+      <div class="rating-row"><span class="stars">${'★'.repeat(Math.floor(p.rating))}${'☆'.repeat(5-Math.floor(p.rating))}</span><span class="rating-count">${p.rating} (${p.reviews})</span></div>
+      <div class="diy-desc">${p.desc}</div>
+      <div class="diy-bottom">
+        <div class="diy-price">₹${p.price.toLocaleString('en-IN')}${p.old?`<span class="orig">₹${p.old.toLocaleString('en-IN')}</span>`:''}</div>
+        <button class="add-btn" onclick="addToCart(${p.id})">Add +</button>
+      </div>
+    </div>
+  </div>`).join('');
+}
+
+function filterDIY(tile,cat){
+  document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('active-cat'));
+  tile.classList.add('active-cat');
+  renderItems(cat==='all'?items:items.filter(i=>i.cat===cat));
+}
+
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;
+  updateCart();
+  if(!document.getElementById('cartDrawer').classList.contains('open'))toggleCart();
+}
+
+function updateCart(){
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById('cartBadge').textContent=count;
+  const body=document.getElementById('cdbody');
+  if(!count){body.innerHTML='<div class="cd-empty">Your cart is empty.</div>';document.getElementById('cdTotal').textContent='₹0';document.getElementById('cartSubtotal').textContent='₹0';return;}
+  let total=0;
+  body.innerHTML=Object.entries(cart).map(([id,qty])=>{
+    const p=items.find(x=>x.id==id);total+=p.price*qty;
+    return `<div class="cd-item">
+      <div class="cd-img"><img src="${p.img}" alt="${p.name}"></div>
+      <div><div class="cdi-cat">${p.cat}</div><div class="cdi-name">${p.name}</div><div class="cdi-price">₹${(p.price*qty).toLocaleString('en-IN')} × ${qty}</div></div>
+      <button class="cdi-rem" onclick="removeItem(${id})">×</button>
+    </div>`;
+  }).join('');
+  document.getElementById('cdTotal').textContent='₹'+total.toLocaleString('en-IN');
+  document.getElementById('cartSubtotal').textContent='₹'+total.toLocaleString('en-IN');
+}
+
+function removeItem(id){delete cart[id];updateCart();}
+function toggleCart(){document.getElementById('cartDrawer').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open');}
+function checkout(){if(!Object.keys(cart).length){alert('Cart is empty!');return;}alert('🔨 Redirecting to checkout...');}
+function scrollToShop(){document.getElementById('shopSection').scrollIntoView({behavior:'smooth'});}
+
+renderItems(items);
+</script>
+</body>
+</html>

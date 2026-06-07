@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX MOTORS — Performance Vehicles</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#040608;
+  --surface:#0a0d12;
+  --panel:#0f1419;
+  --border:rgba(0,255,180,0.12);
+  --neon:#00ffb4;
+  --neon2:#00c8ff;
+  --red:#ff3355;
+  --text:#c8d8e8;
+  --dim:#4a6070;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--void);color:var(--text);font-family:'Rajdhani',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* Scan line effect */
+body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,180,0.012) 2px,rgba(0,255,180,0.012) 4px);pointer-events:none;z-index:1000}
+
+/* HEADER */
+header{display:flex;justify-content:space-between;align-items:center;padding:0 48px;height:64px;background:rgba(4,6,8,0.95);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;backdrop-filter:blur(20px)}
+.logo-wrap{display:flex;align-items:center;gap:14px}
+.logo-icon{width:36px;height:36px;border:2px solid var(--neon);display:flex;align-items:center;justify-content:center;position:relative}
+.logo-icon::before{content:'';position:absolute;inset:3px;background:rgba(0,255,180,0.1)}
+.logo-icon span{font-family:'Orbitron',sans-serif;font-size:13px;font-weight:900;color:var(--neon)}
+.logo-text{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:4px;color:var(--text)}
+.logo-text span{color:var(--neon)}
+nav{display:flex;gap:32px;align-items:center}
+nav a{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s;font-weight:500}
+nav a:hover{color:var(--neon)}
+.nav-cta{background:none;border:1px solid var(--neon);color:var(--neon);padding:8px 20px;font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;font-weight:700}
+.nav-cta:hover{background:var(--neon);color:var(--void)}
+
+/* HERO */
+.hero{height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1600&q=80') center/cover;filter:brightness(.4) saturate(.8)}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(4,6,8,.9) 0%,rgba(4,6,8,.4) 50%,rgba(4,6,8,.85) 100%)}
+
+/* HUD grid overlay */
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,180,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,180,.04) 1px,transparent 1px);background-size:60px 60px;z-index:1}
+
+.hero-content{position:relative;z-index:2;padding:0 80px;max-width:700px}
+.hero-eyebrow{font-family:'Orbitron',sans-serif;font-size:10px;letter-spacing:6px;color:var(--neon);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px;animation:fadeSlide .7s ease both}
+.eyebrow-line{width:40px;height:1px;background:var(--neon)}
+.hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(48px,6vw,88px);font-weight:900;line-height:.9;letter-spacing:-2px;margin-bottom:24px;animation:fadeSlide .7s .1s ease both}
+.hero-title .line2{color:transparent;-webkit-text-stroke:1px rgba(0,255,180,0.5)}
+.hero-sub{font-size:17px;color:rgba(200,216,232,0.55);font-weight:300;line-height:1.6;max-width:420px;margin-bottom:40px;animation:fadeSlide .7s .2s ease both}
+.hero-btns{display:flex;gap:16px;animation:fadeSlide .7s .3s ease both}
+.btn-primary{background:var(--neon);color:var(--void);border:none;padding:14px 36px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.btn-primary:hover{background:var(--neon2)}
+.btn-secondary{background:none;color:var(--text);border:1px solid rgba(200,216,232,0.2);padding:14px 36px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:500;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-secondary:hover{border-color:var(--neon);color:var(--neon)}
+
+/* HUD stats bottom */
+.hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border)}
+.hud-stat{padding:20px 32px;border-right:1px solid var(--border);position:relative}
+.hud-stat:last-child{border-right:none}
+.hud-stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--neon),transparent);opacity:0;transition:opacity .3s}
+.hud-stat:hover::before{opacity:1}
+.hs-label{font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:4px;color:var(--dim);margin-bottom:6px;text-transform:uppercase}
+.hs-value{font-family:'Orbitron',sans-serif;font-size:24px;font-weight:700;color:var(--neon);line-height:1}
+.hs-unit{font-size:11px;color:var(--dim);letter-spacing:2px}
+
+/* FILTER */
+.filter-section{padding:32px 48px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.filter-group{display:flex;gap:8px;flex-wrap:wrap}
+.fpill{background:none;border:1px solid var(--border);color:var(--dim);padding:8px 18px;font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .15s;font-weight:500}
+.fpill:hover,.fpill.active{border-color:var(--neon);color:var(--neon);background:rgba(0,255,180,0.06)}
+.sort-box{display:flex;align-items:center;gap:12px}
+.sort-box select{background:var(--panel);border:1px solid var(--border);color:var(--text);padding:8px 14px;font-family:'Rajdhani',sans-serif;font-size:12px;letter-spacing:2px;outline:none;cursor:pointer}
+
+/* GRID */
+.cars-grid-section{padding:40px 48px}
+.grid-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.gh-title{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:3px;color:var(--text)}
+.gh-count{font-size:12px;color:var(--dim);letter-spacing:2px;font-family:'Orbitron',sans-serif}
+
+.cars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+
+.car-card{background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden;cursor:pointer;transition:border-color .3s,transform .2s}
+.car-card:hover{border-color:var(--neon);transform:translateY(-4px)}
+.car-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,180,0.04),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
+.car-card:hover::after{opacity:1}
+
+.car-image{position:relative;aspect-ratio:16/10;overflow:hidden;background:#080d10}
+.car-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;filter:saturate(.9)}
+.car-card:hover .car-image img{transform:scale(1.05)}
+
+.car-badge{position:absolute;top:14px;left:14px;font-family:'Orbitron',sans-serif;font-size:8px;letter-spacing:3px;padding:5px 10px;text-transform:uppercase}
+.badge-new{background:rgba(0,255,180,0.15);border:1px solid var(--neon);color:var(--neon)}
+.badge-sold{background:rgba(255,51,85,0.15);border:1px solid var(--red);color:var(--red)}
+.badge-hot{background:rgba(255,180,0,0.15);border:1px solid #ffb400;color:#ffb400}
+
+.car-specs-bar{position:absolute;bottom:0;left:0;right:0;background:rgba(4,6,8,0.9);padding:10px 14px;display:flex;gap:16px;transform:translateY(100%);transition:transform .3s;backdrop-filter:blur(8px)}
+.car-card:hover .car-specs-bar{transform:translateY(0)}
+.spec-item{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:1px;color:var(--neon);display:flex;flex-direction:column;gap:2px}
+.spec-item span:last-child{color:var(--dim);font-size:8px}
+
+.car-body{padding:20px}
+.car-brand{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:4px;color:var(--neon);text-transform:uppercase;margin-bottom:6px}
+.car-name{font-size:20px;font-weight:700;letter-spacing:1px;margin-bottom:4px;line-height:1.1}
+.car-year{font-size:12px;color:var(--dim);letter-spacing:2px;margin-bottom:16px}
+.car-price-row{display:flex;justify-content:space-between;align-items:flex-end}
+.car-price{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--neon)}
+.car-emi{font-size:11px;color:var(--dim);letter-spacing:1px}
+.enquire-btn{background:none;border:1px solid var(--border);color:var(--text);padding:8px 16px;font-family:'Rajdhani',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;font-weight:500}
+.enquire-btn:hover{border-color:var(--neon);color:var(--neon)}
+
+/* COMPARISON TABLE */
+.compare-section{margin:0 48px;padding:40px;border:1px solid var(--border);background:var(--surface);margin-bottom:48px}
+.compare-title{font-family:'Orbitron',sans-serif;font-size:16px;letter-spacing:4px;margin-bottom:28px;color:var(--text)}
+.compare-title span{color:var(--neon)}
+.compare-table{width:100%;border-collapse:collapse}
+.compare-table th{font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--dim);padding:10px 16px;border-bottom:1px solid var(--border);text-align:left}
+.compare-table td{padding:12px 16px;border-bottom:1px solid rgba(0,255,180,0.05);font-size:14px;font-weight:500}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .highlight{color:var(--neon);font-family:'Orbitron',sans-serif;font-size:12px}
+.compare-table tr:hover td{background:rgba(0,255,180,0.03)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:28px 48px;display:flex;justify-content:space-between;align-items:center}
+.foot-logo{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:4px;color:var(--dim)}
+.foot-logo span{color:var(--neon)}
+.foot-copy{font-size:11px;color:var(--dim);letter-spacing:2px}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(12px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--panel);border:1px solid var(--border);max-width:520px;width:90%;padding:40px;position:relative;animation:slideUp .4s ease}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--dim);font-size:22px;cursor:pointer;transition:color .15s}
+.modal-close:hover{color:var(--red)}
+.modal-title{font-family:'Orbitron',sans-serif;font-size:16px;letter-spacing:3px;margin-bottom:4px;color:var(--text)}
+.modal-car{font-size:13px;color:var(--neon);letter-spacing:2px;margin-bottom:24px;font-family:'Orbitron',sans-serif}
+.modal-field{margin-bottom:16px}
+.modal-field label{display:block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.modal-field input,.modal-field select,.modal-field textarea{width:100%;background:rgba(0,255,180,0.04);border:1px solid var(--border);color:var(--text);padding:11px 14px;font-family:'Rajdhani',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+.modal-field input:focus,.modal-field select:focus,.modal-field textarea:focus{border-color:var(--neon)}
+.modal-field select option{background:var(--panel)}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-submit{width:100%;background:var(--neon);color:var(--void);border:none;padding:14px;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:4px;text-transform:uppercase;cursor:pointer;margin-top:8px;transition:background .2s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.modal-submit:hover{background:var(--neon2)}
+
+@keyframes fadeSlide{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:1100px){.cars-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:900px){
+  header{padding:0 20px}.logo-text{font-size:12px}nav{gap:16px}nav a:not(:last-child):not(.nav-cta){display:none}
+  .hero-content{padding:0 24px;max-width:100%}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .filter-section{padding:20px 24px}
+  .cars-grid-section{padding:28px 24px}
+  .compare-section{margin:0 24px;padding:24px}
+  footer{padding:20px 24px;flex-direction:column;gap:10px}
+}
+@media(max-width:600px){.cars-grid{grid-template-columns:1fr}.hero-stats{grid-template-columns:1fr 1fr}.modal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <div class="logo-icon"><span>A</span></div>
+    <div class="logo-text">APEX <span>MOTORS</span></div>
+  </div>
+  <nav>
+    <a href="#">Inventory</a>
+    <a href="#">Finance</a>
+    <a href="#">Test Drive</a>
+    <a href="#">About</a>
+    <button class="nav-cta" onclick="scrollToInventory()">View All →</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div>2026 Performance Edition</div>
+    <div class="hero-title">DRIVEN BY<br><span class="line2">PRECISION</span></div>
+    <div class="hero-sub">Curated collection of the world's most exhilarating machines. Every vehicle hand-inspected, every detail obsessed over.</div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollToInventory()">Browse Inventory</button>
+      <button class="btn-secondary">Book Test Drive</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hud-stat"><div class="hs-label">Vehicles In Stock</div><div class="hs-value">248<span class="hs-unit"> units</span></div></div>
+    <div class="hud-stat"><div class="hs-label">Brands Available</div><div class="hs-value">34<span class="hs-unit"> makes</span></div></div>
+    <div class="hud-stat"><div class="hs-label">Avg 0–100 km/h</div><div class="hs-value">3.8<span class="hs-unit">s</span></div></div>
+    <div class="hud-stat"><div class="hs-label">Satisfied Clients</div><div class="hs-value">12K<span class="hs-unit">+</span></div></div>
+  </div>
+</section>
+
+<div class="filter-section" id="inventorySection">
+  <div class="filter-group" id="filterGroup">
+    <button class="fpill active" onclick="filterCars(this,'all')">All Vehicles</button>
+    <button class="fpill" onclick="filterCars(this,'supercar')">Supercar</button>
+    <button class="fpill" onclick="filterCars(this,'suv')">SUV</button>
+    <button class="fpill" onclick="filterCars(this,'sedan')">Sedan</button>
+    <button class="fpill" onclick="filterCars(this,'electric')">Electric</button>
+    <button class="fpill" onclick="filterCars(this,'classic')">Classic</button>
+  </div>
+  <div class="sort-box">
+    <select><option>Sort: Newest</option><option>Price: Low–High</option><option>Price: High–Low</option><option>Fastest First</option></select>
+  </div>
+</div>
+
+<div class="cars-grid-section">
+  <div class="grid-header">
+    <div class="gh-title">Available Inventory</div>
+    <div class="gh-count" id="carCount">— vehicles</div>
+  </div>
+  <div class="cars-grid" id="carsGrid"></div>
+</div>
+
+<div class="compare-section">
+  <div class="compare-title">Quick <span>Comparison</span></div>
+  <table class="compare-table">
+    <thead><tr><th>Model</th><th>Engine</th><th>0–100 km/h</th><th>Top Speed</th><th>Power</th><th>Price</th></tr></thead>
+    <tbody>
+      <tr><td>Ferrari 296 GTB</td><td>3.0L V6 Hybrid</td><td class="highlight">2.9s</td><td>330 km/h</td><td class="highlight">830 hp</td><td>₹4.8 Cr</td></tr>
+      <tr><td>Lamborghini Urus S</td><td>4.0L V8 Biturbo</td><td class="highlight">3.5s</td><td>305 km/h</td><td class="highlight">666 hp</td><td>₹4.18 Cr</td></tr>
+      <tr><td>Porsche 911 Turbo S</td><td>3.8L H6 Biturbo</td><td class="highlight">2.7s</td><td>330 km/h</td><td class="highlight">650 hp</td><td>₹3.06 Cr</td></tr>
+      <tr><td>BMW M8 Competition</td><td>4.4L V8 Biturbo</td><td class="highlight">3.2s</td><td>305 km/h</td><td class="highlight">625 hp</td><td>₹2.15 Cr</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  <div class="foot-logo">APEX <span>MOTORS</span></div>
+  <div class="foot-copy">© 2026 Apex Motors. All rights reserved.</div>
+</footer>
+
+<!-- Enquiry Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-title">Enquire Now</div>
+    <div class="modal-car" id="modalCarName"></div>
+    <div class="modal-grid">
+      <div class="modal-field"><label>Full Name</label><input type="text" placeholder="Your name"></div>
+      <div class="modal-field"><label>Phone</label><input type="tel" placeholder="+91"></div>
+    </div>
+    <div class="modal-field"><label>Email</label><input type="email" placeholder="you@example.com"></div>
+    <div class="modal-grid">
+      <div class="modal-field"><label>Preferred Date</label><input type="date"></div>
+      <div class="modal-field"><label>Finance Required</label><select><option>No – Cash Purchase</option><option>Yes – Loan</option><option>Yes – Lease</option></select></div>
+    </div>
+    <div class="modal-field"><label>Message</label><textarea rows="2" placeholder="Additional requirements..."></textarea></div>
+    <button class="modal-submit" onclick="submitEnquiry()">Submit Enquiry →</button>
+  </div>
+</div>
+
+<script>
+const cars=[
+  {id:1,name:'296 GTB',brand:'Ferrari',year:2025,cat:'supercar',badge:'hot',price:'₹4.8 Cr',emi:'₹3.2L/mo',ps0:'2.9s',hp:'830',top:'330',img:'https://images.unsplash.com/photo-1592198084033-aade902d1aae?w=600&q=75'},
+  {id:2,name:'Urus S',brand:'Lamborghini',year:2025,cat:'suv',badge:'new',price:'₹4.18 Cr',emi:'₹2.8L/mo',ps0:'3.5s',hp:'666',top:'305',img:'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=75'},
+  {id:3,name:'911 Turbo S',brand:'Porsche',year:2024,cat:'supercar',badge:null,price:'₹3.06 Cr',emi:'₹2.1L/mo',ps0:'2.7s',hp:'650',top:'330',img:'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&q=75'},
+  {id:4,name:'Model S Plaid',brand:'Tesla',year:2025,cat:'electric',badge:'new',price:'₹1.34 Cr',emi:'₹92K/mo',ps0:'2.1s',hp:'1020',top:'320',img:'https://images.unsplash.com/photo-1560958089-b8a1929cea89?w=600&q=75'},
+  {id:5,name:'M8 Competition',brand:'BMW',year:2024,cat:'sedan',badge:null,price:'₹2.15 Cr',emi:'₹1.4L/mo',ps0:'3.2s',hp:'625',top:'305',img:'https://images.unsplash.com/photo-1555215695-3004980ad54e?w=600&q=75'},
+  {id:6,name:'Defender V8',brand:'Land Rover',year:2025,cat:'suv',badge:'new',price:'₹1.88 Cr',emi:'₹1.25L/mo',ps0:'4.9s',hp:'525',top:'240',img:'https://images.unsplash.com/photo-1539706683684-0d63d0c0b0e2?w=600&q=75'},
+  {id:7,name:'E-Class AMG',brand:'Mercedes',year:2026,cat:'sedan',badge:'new',price:'₹1.12 Cr',emi:'₹74K/mo',ps0:'3.9s',hp:'503',top:'290',img:'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=600&q=75'},
+  {id:8,name:'Diablo VT',brand:'Lamborghini',year:1999,cat:'classic',badge:'hot',price:'₹3.5 Cr',emi:'Contact',ps0:'4.0s',hp:'492',top:'325',img:'https://images.unsplash.com/photo-1611566026373-c6c8da0ea861?w=600&q=75'},
+  {id:9,name:'Ioniq 6 AWD',brand:'Hyundai',year:2025,cat:'electric',badge:null,price:'₹54.6 L',emi:'₹42K/mo',ps0:'5.1s',hp:'321',top:'185',img:'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=600&q=75'},
+];
+
+let currentEnquiryCar='';
+
+function renderCars(filter='all'){
+  const list=filter==='all'?cars:cars.filter(c=>c.cat===filter);
+  document.getElementById('carCount').textContent=list.length+' vehicles';
+  document.getElementById('carsGrid').innerHTML=list.map((c,i)=>`
+  <div class="car-card" style="animation:fadeSlide .5s ${i*.07}s ease both">
+    <div class="car-image">
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+      ${c.badge?`<div class="car-badge badge-${c.badge}">${c.badge.toUpperCase()}</div>`:''}
+      <div class="car-specs-bar">
+        <div class="spec-item">${c.ps0}<span>0–100</span></div>
+        <div class="spec-item">${c.hp}hp<span>Power</span></div>
+        <div class="spec-item">${c.top}km/h<span>Top Speed</span></div>
+      </div>
+    </div>
+    <div class="car-body">
+      <div class="car-brand">${c.brand}</div>
+      <div class="car-name">${c.name}</div>
+      <div class="car-year">${c.year} · ${c.cat.charAt(0).toUpperCase()+c.cat.slice(1)}</div>
+      <div class="car-price-row">
+        <div><div class="car-price">${c.price}</div><div class="car-emi">EMI from ${c.emi}</div></div>
+        <button class="enquire-btn" onclick="openModal('${c.brand} ${c.name}')">Enquire →</button>
+      </div>
+    </div>
+  </div>`).join('');
+}
+
+function filterCars(btn,cat){
+  document.querySelectorAll('.fpill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderCars(cat);
+}
+
+function openModal(name){currentEnquiryCar=name;document.getElementById('modalCarName').textContent=name;document.getElementById('modalOverlay').classList.add('open');}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
+function submitEnquiry(){alert(`✅ Enquiry submitted for ${currentEnquiryCar}.\nOur specialist will contact you within 2 hours.`);closeModal();}
+function scrollToInventory(){document.getElementById('inventorySection').scrollIntoView({behavior:'smooth'});}
+
+renderCars();
+</script>
+</body>
+</html>

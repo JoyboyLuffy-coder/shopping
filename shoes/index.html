@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLE/RIOT — Kicks Culture</title>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --concrete:#1a1a1a;
+  --asphalt:#111111;
+  --white:#f5f5f5;
+  --electric:#00ff88;
+  --volt:#e8ff00;
+  --hot:#ff2d55;
+  --purple:#9b5dff;
+  --grey:#888;
+  --border:rgba(245,245,245,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--asphalt);color:var(--white);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* concrete texture */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:999}
+
+/* HEADER */
+.site-header{padding:0 40px;height:60px;background:rgba(17,17,17,0.97);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(16px)}
+.logo{font-family:'Black Han Sans',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
+.logo span{color:var(--electric)}
+nav a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);text-decoration:none;margin-left:28px;font-weight:700;transition:color .15s}
+nav a:hover{color:var(--white)}
+.header-right{display:flex;align-items:center;gap:16px}
+.cart-ico{cursor:pointer;font-size:20px;position:relative}
+.cart-ico .badge{position:absolute;top:-6px;right:-6px;background:var(--electric);color:var(--asphalt);width:16px;height:16px;border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif}
+
+/* HERO */
+.hero{background:var(--concrete);min-height:90vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;position:relative}
+.hero::before{content:'RIOT';position:absolute;font-family:'Black Han Sans',sans-serif;font-size:30vw;color:rgba(0,255,136,0.03);top:50%;left:50%;transform:translate(-50%,-50%);user-select:none;letter-spacing:-10px;z-index:0}
+
+.hero-left{padding:80px 56px;display:flex;flex-direction:column;justify-content:space-between;position:relative;z-index:1}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--electric);color:var(--asphalt);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:7px 14px;width:fit-content;margin-bottom:24px;animation:blastIn .5s ease both}
+.hero-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(56px,7vw,110px);line-height:.9;letter-spacing:-2px;text-transform:uppercase;animation:blastIn .5s .08s ease both}
+.hero-title .line-accent{color:transparent;-webkit-text-stroke:2px var(--electric);display:block}
+.hero-title .line-volt{color:var(--volt);display:block}
+.hero-sub{font-size:16px;color:var(--grey);font-weight:300;line-height:1.6;max-width:320px;margin-top:20px;animation:blastIn .5s .16s ease both}
+.hero-ctas{display:flex;gap:12px;margin-top:36px;animation:blastIn .5s .24s ease both}
+.btn-solid{background:var(--electric);color:var(--asphalt);border:none;padding:14px 32px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.btn-solid:hover{background:var(--volt)}
+.btn-ghost{background:none;border:2px solid rgba(245,245,245,0.2);color:var(--white);padding:14px 32px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.btn-ghost:hover{border-color:var(--white)}
+
+.hero-numbers{display:flex;gap:32px}
+.hn-item .hn-val{font-family:'Black Han Sans',sans-serif;font-size:36px;color:var(--electric)}
+.hn-item .hn-label{font-size:10px;color:var(--grey);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+
+.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:40px;background:linear-gradient(135deg,rgba(0,255,136,0.05),transparent)}
+.hero-shoe-img{max-width:85%;filter:drop-shadow(0 30px 60px rgba(0,255,136,0.25));animation:floatShoe 4s ease-in-out infinite}
+@keyframes floatShoe{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(-3deg)}}
+
+/* MARQUEE */
+.marquee-bar{background:var(--electric);padding:10px 0;overflow:hidden}
+.marquee-track{display:inline-block;animation:slide 14s linear infinite}
+.marquee-track span{font-family:'Black Han Sans',sans-serif;font-size:12px;letter-spacing:3px;color:var(--asphalt);text-transform:uppercase;margin:0 28px}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* CATEGORY STRIP */
+.cat-strip{display:flex;gap:2px;overflow-x:auto;padding:0;scrollbar-width:none}
+.cat-strip::-webkit-scrollbar{display:none}
+.cat-tile{flex:1;min-width:160px;aspect-ratio:1;position:relative;overflow:hidden;cursor:pointer}
+.cat-tile img{width:100%;height:100%;object-fit:cover;filter:brightness(.5) saturate(.7);transition:all .4s}
+.cat-tile:hover img{filter:brightness(.7) saturate(1);transform:scale(1.04)}
+.cat-label{position:absolute;bottom:16px;left:16px;right:16px}
+.cat-label .cl-name{font-family:'Black Han Sans',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:1px}
+.cat-label .cl-count{font-size:10px;color:var(--electric);letter-spacing:3px;text-transform:uppercase;margin-top:2px}
+.cat-tile.active-cat::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--electric)}
+
+/* FILTER */
+.shop-header{padding:36px 40px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.shop-title{font-family:'Black Han Sans',sans-serif;font-size:32px;letter-spacing:1px;text-transform:uppercase}
+.shop-filters{display:flex;gap:8px;flex-wrap:wrap}
+.sf{background:none;border:1px solid var(--border);color:var(--grey);padding:8px 18px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;font-weight:700;transition:all .15s}
+.sf:hover,.sf.active{background:var(--white);color:var(--asphalt);border-color:var(--white)}
+.sf.volt.active{background:var(--volt);color:var(--asphalt);border-color:var(--volt)}
+
+/* PRODUCT GRID */
+.product-section{padding:28px 40px 56px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.shoe-card{background:var(--concrete);position:relative;overflow:hidden;cursor:pointer;transition:transform .2s}
+.shoe-card:hover{transform:translateY(-6px)}
+.shoe-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,136,0.07),transparent);opacity:0;transition:opacity .3s;z-index:0;pointer-events:none}
+.shoe-card:hover::before{opacity:1}
+
+.shoe-img-wrap{position:relative;background:linear-gradient(135deg,#1e1e1e,#2a2a2a);aspect-ratio:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:20px}
+.shoe-img-wrap img{width:90%;height:90%;object-fit:contain;filter:drop-shadow(0 12px 24px rgba(0,0,0,0.5));transition:transform .5s ease}
+.shoe-card:hover .shoe-img-wrap img{transform:scale(1.08) rotate(-2deg)}
+
+.shoe-badge{position:absolute;top:10px;left:10px;font-family:'Black Han Sans',sans-serif;font-size:9px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase}
+.sb-drop{background:var(--hot);color:white}
+.sb-new{background:var(--electric);color:var(--asphalt)}
+.sb-collab{background:var(--purple);color:white}
+.sb-restock{background:var(--volt);color:var(--asphalt)}
+
+.shoe-like{position:absolute;top:10px;right:10px;background:rgba(17,17,17,0.7);border:none;color:var(--grey);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;opacity:0;transition:opacity .2s,background .15s;backdrop-filter:blur(8px)}
+.shoe-card:hover .shoe-like{opacity:1}
+.shoe-like:hover{background:var(--hot);color:white}
+
+.shoe-add-quick{position:absolute;bottom:0;left:0;right:0;background:var(--electric);color:var(--asphalt);border:none;padding:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transform:translateY(100%);transition:transform .25s}
+.shoe-card:hover .shoe-add-quick{transform:translateY(0)}
+.shoe-add-quick:hover{background:var(--volt)}
+
+.shoe-info{padding:14px;position:relative;z-index:1}
+.shoe-brand{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--electric);margin-bottom:4px;font-weight:700}
+.shoe-name{font-family:'Black Han Sans',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:1px;line-height:1.1;margin-bottom:8px}
+.shoe-bottom{display:flex;justify-content:space-between;align-items:flex-end}
+.shoe-price{font-size:16px;font-weight:700}
+.shoe-price .orig{font-size:11px;color:var(--grey);text-decoration:line-through;font-weight:400;margin-left:6px}
+.shoe-sizes{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.sz{font-size:9px;border:1px solid var(--border);color:var(--grey);padding:3px 6px;letter-spacing:1px}
+.sz.available{cursor:pointer;transition:all .12s}.sz.available:hover{border-color:var(--electric);color:var(--electric)}
+.sz.out{opacity:.25;text-decoration:line-through}
+
+/* CART */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(8px)}
+.cart-overlay.open{opacity:1;pointer-events:all}
+.cart-drawer{position:fixed;right:0;top:0;bottom:0;width:420px;background:var(--concrete);border-left:1px solid var(--border);z-index:201;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .4s cubic-bezier(.25,.1,.25,1)}
+.cart-drawer.open{transform:translateX(0)}
+.cdh{padding:24px 28px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.cdh-t{font-family:'Black Han Sans',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase}
+.cdh-t span{color:var(--electric)}
+.cdh-close{background:none;border:none;color:var(--grey);font-size:22px;cursor:pointer;transition:color .15s}
+.cdh-close:hover{color:var(--white)}
+.cdbody{flex:1;overflow-y:auto;padding:20px 28px}
+.cd-item{display:grid;grid-template-columns:70px 1fr auto;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.cd-img{background:#222;display:flex;align-items:center;justify-content:center;aspect-ratio:1;overflow:hidden}
+.cd-img img{width:90%;height:90%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5))}
+.cdi-brand{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--electric);margin-bottom:2px}
+.cdi-name{font-family:'Black Han Sans',sans-serif;font-size:14px;text-transform:uppercase;margin-bottom:6px}
+.cdi-price{font-size:13px;font-weight:700}
+.cdi-rem{background:none;border:none;color:var(--grey);font-size:18px;cursor:pointer;align-self:start;transition:color .15s}
+.cdi-rem:hover{color:var(--hot)}
+.cdf{padding:20px 28px;border-top:1px solid var(--border)}
+.cdf-row{display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;color:var(--grey)}
+.cdf-total{font-family:'Black Han Sans',sans-serif;font-size:20px;letter-spacing:2px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;color:var(--white)}
+.cdf-total span:last-child{color:var(--electric)}
+.checkout-btn{width:100%;background:var(--electric);color:var(--asphalt);border:none;padding:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:background .2s;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+.checkout-btn:hover{background:var(--volt)}
+.cd-empty{text-align:center;padding:60px 0;color:var(--grey);font-family:'Black Han Sans',sans-serif;font-size:18px;text-transform:uppercase;letter-spacing:2px}
+
+/* FOOTER */
+footer{background:#0a0a0a;border-top:1px solid var(--border);padding:36px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.fl{font-family:'Black Han Sans',sans-serif;font-size:18px;letter-spacing:2px;text-transform:uppercase}
+.fl span{color:var(--electric)}
+.fc{font-size:11px;color:var(--grey);letter-spacing:2px}
+
+@keyframes blastIn{from{opacity:0;transform:translateY(30px) scale(.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media(max-width:1100px){.products{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:56vw;padding:20px}
+  .hero-left{padding:48px 24px}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .site-header{padding:0 20px}nav{gap:10px}nav a{margin-left:0;display:none}
+  .shop-header{padding:28px 24px 0}
+  .product-section{padding:20px 24px 40px}
+  footer{padding:24px}
+}
+@media(max-width:480px){.products{grid-template-columns:1fr}.cart-drawer{width:100%}}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="logo">SOLE/<span>RIOT</span></div>
+  <nav>
+    <a href="#">Drops</a>
+    <a href="#">Brands</a>
+    <a href="#">Collabs</a>
+    <a href="#">Resell</a>
+  </nav>
+  <div class="header-right">
+    <div class="cart-ico" onclick="toggleCart()">🛒<div class="badge" id="cartBadge">0</div></div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-tag">🔥 Live Drop · Jun 07, 2026</div>
+      <div class="hero-title">KILL<br><span class="line-accent">THE</span><span class="line-volt">NORM</span></div>
+      <div class="hero-sub">Exclusive drops, collabs, and grails. Zero fakes, zero compromise. Built for the obsessed.</div>
+      <div class="hero-ctas">
+        <button class="btn-solid" onclick="scrollToShop()">Shop Drops</button>
+        <button class="btn-ghost">View Lookbook</button>
+      </div>
+    </div>
+    <div class="hero-numbers">
+      <div class="hn-item"><div class="hn-val">380+</div><div class="hn-label">Styles</div></div>
+      <div class="hn-item"><div class="hn-val">42</div><div class="hn-label">Brands</div></div>
+      <div class="hn-item"><div class="hn-val">100%</div><div class="hn-label">Authentic</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-shoe-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=80" alt="Signature Shoe">
+  </div>
+</section>
+
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span>New Drop ◆</span><span>Air Max 2026 ◆</span><span>Collab Alert ◆</span><span>100% Authentic ◆</span><span>Free Shipping ₹5K+ ◆</span><span>Resell Value +220% ◆</span>
+    <span>New Drop ◆</span><span>Air Max 2026 ◆</span><span>Collab Alert ◆</span><span>100% Authentic ◆</span><span>Free Shipping ₹5K+ ◆</span><span>Resell Value +220% ◆</span>
+  </div>
+</div>
+
+<div class="cat-strip" id="catStrip">
+  <div class="cat-tile active-cat" onclick="filterShoes(this,'all')">
+    <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=75" alt="All">
+    <div class="cat-label"><div class="cl-name">All</div><div class="cl-count">12 styles</div></div>
+  </div>
+  <div class="cat-tile" onclick="filterShoes(this,'sneaker')">
+    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=75" alt="Sneakers">
+    <div class="cat-label"><div class="cl-name">Sneakers</div><div class="cl-count">6 styles</div></div>
+  </div>
+  <div class="cat-tile" onclick="filterShoes(this,'boot')">
+    <img src="https://images.unsplash.com/photo-1542623024-a797e74e9e56?w=400&q=75" alt="Boots">
+    <div class="cat-label"><div class="cl-name">Boots</div><div class="cl-count">3 styles</div></div>
+  </div>
+  <div class="cat-tile" onclick="filterShoes(this,'slide')">
+    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=75" alt="Slides">
+    <div class="cat-label"><div class="cl-name">Slides</div><div class="cl-count">2 styles</div></div>
+  </div>
+  <div class="cat-tile" onclick="filterShoes(this,'running')">
+    <img src="https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&q=75" alt="Running">
+    <div class="cat-label"><div class="cl-name">Running</div><div class="cl-count">4 styles</div></div>
+  </div>
+</div>
+
+<div class="shop-header" id="shopSection">
+  <div class="shop-title">Latest Drops</div>
+  <div class="shop-filters">
+    <button class="sf active" onclick="filterBrand(this,'all')">All</button>
+    <button class="sf" onclick="filterBrand(this,'nike')">Nike</button>
+    <button class="sf" onclick="filterBrand(this,'adidas')">Adidas</button>
+    <button class="sf" onclick="filterBrand(this,'new-balance')">New Balance</button>
+    <button class="sf" onclick="filterBrand(this,'jordan')">Jordan</button>
+  </div>
+</div>
+
+<div class="product-section">
+  <div class="products" id="productsGrid"></div>
+</div>
+
+<footer>
+  <div class="fl">SOLE/<span>RIOT</span></div>
+  <div class="fc">© 2026 · Hyderabad, India · All kicks authentic.</div>
+</footer>
+
+<!-- Cart -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cdh">
+    <div class="cdh-t">Cart <span id="cartTitleCount">(0)</span></div>
+    <button class="cdh-close" onclick="toggleCart()">×</button>
+  </div>
+  <div class="cdbody" id="cdbody"><div class="cd-empty">Bag is empty</div></div>
+  <div class="cdf">
+    <div class="cdf-row"><span>Shipping</span><span>Free over ₹5,000</span></div>
+    <div class="cdf-total"><span>Total</span><span id="cdTotal">₹0</span></div>
+    <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+  </div>
+</div>
+
+<script>
+const shoes=[
+  {id:1,name:'Air Max Pulse',brand:'Nike',cat:'sneaker',badge:'new',price:18500,old:null,img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=75',sizes:['UK7','UK8','UK9','UK10','UK11'],slug:'nike'},
+  {id:2,name:'SL 72 OG',brand:'Adidas',cat:'sneaker',badge:'drop',price:12900,old:null,img:'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=400&q=75',sizes:['UK7','UK8','UK9','UK10'],slug:'adidas'},
+  {id:3,name:'Jordan 1 OG High',brand:'Jordan',cat:'sneaker',badge:'collab',price:22400,old:28000,img:'https://images.unsplash.com/photo-1556048219-bb6978360b84?w=400&q=75',sizes:['UK8','UK9','UK10','UK11'],slug:'jordan'},
+  {id:4,name:'990v6 Grey',brand:'New Balance',cat:'running',badge:'restock',price:16800,old:null,img:'https://images.unsplash.com/photo-1539185441755-769473a23570?w=400&q=75',sizes:['UK7','UK8','UK9','UK10','UK11'],slug:'new-balance'},
+  {id:5,name:'Ultraboost 24',brand:'Adidas',cat:'running',badge:null,price:15200,old:18000,img:'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=400&q=75',sizes:['UK8','UK9','UK10'],slug:'adidas'},
+  {id:6,name:'Chuck Taylor All Star',brand:'Converse',cat:'sneaker',badge:null,price:5400,old:null,img:'https://images.unsplash.com/photo-1463100099107-aa0980c362e6?w=400&q=75',sizes:['UK6','UK7','UK8','UK9','UK10'],slug:'other'},
+  {id:7,name:'Timberland 6-in Boots',brand:'Timberland',cat:'boot',badge:'drop',price:14200,old:null,img:'https://images.unsplash.com/photo-1542623024-a797e74e9e56?w=400&q=75',sizes:['UK8','UK9','UK10','UK11'],slug:'other'},
+  {id:8,name:'Yeezy Slide Pure',brand:'Adidas',cat:'slide',badge:'collab',price:9900,old:12500,img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=75',sizes:['UK7','UK8','UK9','UK10'],slug:'adidas'},
+  {id:9,name:'Air Force 1 Low',brand:'Nike',cat:'sneaker',badge:'new',price:11200,old:null,img:'https://images.unsplash.com/photo-1587563871167-1ee9c731aefb?w=400&q=75',sizes:['UK7','UK8','UK9','UK10','UK11'],slug:'nike'},
+];
+
+let cart={},activeFilter='all';
+
+function renderShoes(list){
+  document.getElementById('productsGrid').innerHTML=list.map((s,i)=>`
+  <div class="shoe-card" style="animation:blastIn .4s ${i*.06}s ease both">
+    <div class="shoe-img-wrap">
+      <img src="${s.img}" alt="${s.name}" loading="lazy">
+      ${s.badge?`<div class="shoe-badge sb-${s.badge}">${s.badge.charAt(0).toUpperCase()+s.badge.slice(1)}</div>`:''}
+      <button class="shoe-like">♡</button>
+      <button class="shoe-add-quick" onclick="addToCart(${s.id})">Add to Cart</button>
+    </div>
+    <div class="shoe-info">
+      <div class="shoe-brand">${s.brand}</div>
+      <div class="shoe-name">${s.name}</div>
+      <div class="shoe-bottom">
+        <div class="shoe-price">₹${s.price.toLocaleString('en-IN')}${s.old?`<span class="orig">₹${s.old.toLocaleString('en-IN')}</span>`:''}</div>
+      </div>
+      <div class="shoe-sizes">
+        ${s.sizes.map(sz=>`<div class="sz available">${sz}</div>`).join('')}
+        <div class="sz out">UK12</div>
+      </div>
+    </div>
+  </div>`).join('');
+}
+
+function filterShoes(tile,cat){
+  document.querySelectorAll('.cat-tile').forEach(t=>t.classList.remove('active-cat'));
+  tile.classList.add('active-cat');
+  const list=cat==='all'?shoes:shoes.filter(s=>s.cat===cat);
+  renderShoes(list);
+}
+
+function filterBrand(btn,brand){
+  document.querySelectorAll('.sf').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const list=brand==='all'?shoes:shoes.filter(s=>s.slug===brand);
+  renderShoes(list);
+}
+
+function addToCart(id){
+  cart[id]=(cart[id]||0)+1;
+  updateCart();
+  if(!document.getElementById('cartDrawer').classList.contains('open'))toggleCart();
+}
+
+function updateCart(){
+  const count=Object.values(cart).reduce((a,b)=>a+b,0);
+  document.getElementById('cartBadge').textContent=count;
+  document.getElementById('cartTitleCount').textContent=`(${count})`;
+  const body=document.getElementById('cdbody');
+  if(!count){body.innerHTML='<div class="cd-empty">Bag is empty</div>';document.getElementById('cdTotal').textContent='₹0';return;}
+  let total=0;
+  body.innerHTML=Object.entries(cart).map(([id,qty])=>{
+    const s=shoes.find(x=>x.id==id);total+=s.price*qty;
+    return `<div class="cd-item">
+      <div class="cd-img"><img src="${s.img}" alt="${s.name}"></div>
+      <div><div class="cdi-brand">${s.brand}</div><div class="cdi-name">${s.name}</div><div class="cdi-price">₹${(s.price*qty).toLocaleString('en-IN')} × ${qty}</div></div>
+      <button class="cdi-rem" onclick="removeItem(${id})">×</button>
+    </div>`;
+  }).join('');
+  document.getElementById('cdTotal').textContent='₹'+total.toLocaleString('en-IN');
+}
+
+function removeItem(id){delete cart[id];updateCart();}
+function toggleCart(){document.getElementById('cartDrawer').classList.toggle('open');document.getElementById('cartOverlay').classList.toggle('open');}
+function checkout(){if(!Object.keys(cart).length){alert('Cart is empty!');return;}alert('🔥 Proceeding to checkout...');}
+function scrollToShop(){document.getElementById('shopSection').scrollIntoView({behavior:'smooth'});}
+
+renderShoes(shoes);
+</script>
+</body>
+</html>
+
